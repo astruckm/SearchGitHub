@@ -11,7 +11,15 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        let search = GitHubSearchRepos(searchQuery: "tetris+language:assembly")
+        let client = GitHubClient()
+        client.searchRepos(search) { result in
+            switch result {
+            case .success(let response): print(response.totalCount)
+            case .failure(let error): print("error in result: ", error)
+            }
+        }
     }
 
 
