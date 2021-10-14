@@ -27,17 +27,16 @@ struct GitHubSearchRepos {
         if let isDescending = isDescending {
             queryItems.append(URLQueryItem(name: "order", value: isDescending ? "desc" : "asc"))
         }
-        if let resultsPerPage = resultsPerPage {
+        if let resultsPerPage = resultsPerPage, let numPages = numPages {
             queryItems.append(URLQueryItem(name: "per_page", value: String(resultsPerPage)))
-        }
-        if let numPages = numPages {
             queryItems.append(URLQueryItem(name: "page", value: String(numPages)))
+        } else {
+            queryItems.append(URLQueryItem(name: "per_page", value: "100"))
+            queryItems.append(URLQueryItem(name: "page", value: "1"))
         }
         components.queryItems = queryItems
         guard let url = components.url else { return nil }
-        var request = URLRequest(url: url)
-//        request.addValue("Accept", forHTTPHeaderField: "application/vnd.github.v3+json")
-        return request
+        return URLRequest(url: url)
     }
 }
 
@@ -46,8 +45,4 @@ enum GitHubSortOption: String, CaseIterable {
     case forks = "forks"
     case helpWantedIssues = "help-wanted-issues"
     case updated = "updated"
-}
-
-enum APIError: Error {
-    
 }
