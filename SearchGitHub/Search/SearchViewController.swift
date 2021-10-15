@@ -131,6 +131,7 @@ extension SearchViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
     }
     
+    // Implement incremental search here by loading repos on each keyboard tap
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         viewModel.loadRepos(searchQuery: text)

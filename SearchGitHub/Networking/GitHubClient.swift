@@ -16,7 +16,6 @@ class GitHubClient {
         let session = URLSession(configuration: config)
         let task = session.dataTask(with: request) { data, response, error in
             if let error = error {
-                print("error: ", error.localizedDescription)
                 completion(.failure(APIError.fetchError(error)))
             }
             if let response = response, let statusCode = (response as? HTTPURLResponse)?.statusCode, (statusCode < 200 || statusCode >= 300) {
@@ -24,7 +23,6 @@ class GitHubClient {
                 return
             }
             guard let data = data else {
-                print("no data")
                 completion(.failure(APIError.noData("No data fetched")))
                 return
             }
@@ -33,6 +31,7 @@ class GitHubClient {
                 completion(.success(response))
             } catch {
                 print("decoding error: ", error.localizedDescription)
+                completion(.failure(APIError.decodingError(error)))
             }
         }
         task.resume()

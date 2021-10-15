@@ -19,6 +19,7 @@ class SearchViewModel {
     let searchQueue = DispatchQueue(label: "searchQueue", qos: .userInteractive, attributes: .concurrent)
     var searchTask: DispatchWorkItem?
     
+    // Throttle the loading request so it can only fire every 0.5 seconds
     func loadRepos(searchQuery: String) {
         self.searchTask?.cancel()
         self.loadingRepos?()
@@ -28,26 +29,23 @@ class SearchViewModel {
         }
         self.searchTask = task
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: task)
+        searchQueue.asyncAfter(deadline: .now() + 0.5, execute: task)
     }
     
     private func loadReposTask(_ searchQuery: String) {
         let search = GitHubSearchRepos(searchQuery: searchQuery)
         let client = GitHubClient()
-        searchQueue.async { [weak self] in
+        client.searchRepos(search) { [weak self] result in
             guard let self = self else { return }
-            client.searchRepos(search) { result in
-                switch result {
-                case .success(let response):
-                    self.repos = response.items.map {
-                        Repo(repoName: $0.fullName,
-                             url: URL(string: $0.htmlURL)) }
-                    self.finishedLoading?()
-                case .failure(let error):
-                    print("error in result: \(error) \(error.localizedDescription)")
-                    self.finishedLoading?()
-                    
-                }
+            switch result {
+            case .success(let response):
+                self.repos = response.items.map {
+                    Repo(repoName: $0.fullName,
+                         url: URL(string: $0.htmlURL)) }
+                self.finishedLoading?()
+            case .failure(let error):
+                print("error in result: \(error) \(error.localizedDescription)")
+                self.finishedLoading?()
             }
         }
     }
