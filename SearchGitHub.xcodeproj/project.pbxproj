@@ -19,7 +19,6 @@
 		729DC3982714706A00D0D9A7 /* SearchGitHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729DC3972714706A00D0D9A7 /* SearchGitHubUITests.swift */; };
 		72C67BA7271712CD00EA3BE4 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C67BA6271712CD00EA3BE4 /* SearchViewModel.swift */; };
 		72C67BA927171EBA00EA3BE4 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C67BA827171EBA00EA3BE4 /* UITextField+Extensions.swift */; };
-		72C67BAC271720BC00EA3BE4 /* SearchSuggestionsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C67BAB271720BC00EA3BE4 /* SearchSuggestionsTableView.swift */; };
 		72C67BAF2717281200EA3BE4 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C67BAE2717281200EA3BE4 /* SearchResultTableViewCell.swift */; };
 		72C67BB1271728C900EA3BE4 /* ReuseableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C67BB0271728C900EA3BE4 /* ReuseableCell.swift */; };
 		72C67BB4271728EE00EA3BE4 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C67BB3271728EE00EA3BE4 /* Repo.swift */; };
@@ -62,7 +61,6 @@
 		729DC3992714706A00D0D9A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72C67BA6271712CD00EA3BE4 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		72C67BA827171EBA00EA3BE4 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
-		72C67BAB271720BC00EA3BE4 /* SearchSuggestionsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionsTableView.swift; sourceTree = "<group>"; };
 		72C67BAE2717281200EA3BE4 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		72C67BB0271728C900EA3BE4 /* ReuseableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseableCell.swift; sourceTree = "<group>"; };
 		72C67BB3271728EE00EA3BE4 /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
@@ -172,7 +170,6 @@
 			children = (
 				729DC3792714706800D0D9A7 /* SearchViewController.swift */,
 				72C67BAE2717281200EA3BE4 /* SearchResultTableViewCell.swift */,
-				72C67BAB271720BC00EA3BE4 /* SearchSuggestionsTableView.swift */,
 				72C67BA6271712CD00EA3BE4 /* SearchViewModel.swift */,
 			);
 			path = Search;
@@ -323,7 +320,6 @@
 				72C67BB1271728C900EA3BE4 /* ReuseableCell.swift in Sources */,
 				729DC37A2714706800D0D9A7 /* SearchViewController.swift in Sources */,
 				729DC3762714706800D0D9A7 /* AppDelegate.swift in Sources */,
-				72C67BAC271720BC00EA3BE4 /* SearchSuggestionsTableView.swift in Sources */,
 				72C67BAF2717281200EA3BE4 /* SearchResultTableViewCell.swift in Sources */,
 				7288D55C2715CC39008892FA /* GitHubClient.swift in Sources */,
 				7288D5572715B561008892FA /* GitHubRequest.swift in Sources */,

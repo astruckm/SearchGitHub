@@ -9,4 +9,5 @@ import Foundation
 
 struct Repo {
     let repoName: String
+    let url: URL?
 }
