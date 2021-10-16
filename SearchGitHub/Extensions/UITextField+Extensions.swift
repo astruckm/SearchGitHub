@@ -9,7 +9,7 @@ import UIKit
 
 extension UITextField {
     func addSpaceBeforeText() {
-        let leftView = UIView(frame: CGRect(x: 10, y: 0, width: 7, height: 26))
+        let leftView = UIView(frame: CGRect(x: 10, y: 0, width: 7, height: bounds.height))
         leftView.backgroundColor = .clear
         self.leftView = leftView
         self.leftViewMode = .always

@@ -8,7 +8,7 @@
 import UIKit
 
 class SearchViewModel {
-    var repos: [Repo] = [/*Repo(repoName: "something", url: URL(string: "https://www.google.com")!), Repo(repoName: "something else", url: URL(string: "https://www.apple.com")!)*/] {
+    var repos: [Repo] = [] {
         willSet {
             self.reloadSearchResultsTableView?()
         }
@@ -18,8 +18,9 @@ class SearchViewModel {
     var finishedLoading: (() -> Void)?
     let searchQueue = DispatchQueue(label: "searchQueue", qos: .userInteractive, attributes: .concurrent)
     var searchTask: DispatchWorkItem?
+    var shouldCancelTask: Bool = false // Block the comletion of a cancelled searchTask
+    let throttleInterval: TimeInterval = 0.5 // in seconds
     
-    // Throttle the loading request so it can only fire every 0.5 seconds
     func loadRepos(searchQuery: String) {
         self.searchTask?.cancel()
         self.loadingRepos?()
@@ -29,14 +30,16 @@ class SearchViewModel {
         }
         self.searchTask = task
         
-        searchQueue.asyncAfter(deadline: .now() + 0.5, execute: task)
+        searchQueue.asyncAfter(deadline: .now() + throttleInterval, execute: task)
     }
     
     private func loadReposTask(_ searchQuery: String) {
         let search = GitHubSearchRepos(searchQuery: searchQuery)
         let client = GitHubClient()
+        shouldCancelTask = false
         client.searchRepos(search) { [weak self] result in
             guard let self = self else { return }
+            guard !self.shouldCancelTask else { return }
             switch result {
             case .success(let response):
                 self.repos = response.items.map {
@@ -48,5 +51,12 @@ class SearchViewModel {
                 self.finishedLoading?()
             }
         }
+    }
+    
+    func clearData() {
+        self.finishedLoading?()
+        self.repos = []
+        self.shouldCancelTask = true
+        self.searchTask?.cancel()
     }
 }

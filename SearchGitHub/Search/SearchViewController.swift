@@ -37,7 +37,7 @@ class SearchViewController: UIViewController {
     }()
     
     lazy var viewModel = SearchViewModel()
-    var keyboardHeight: CGFloat = 254 // The height on iPod touch simulator
+    var keyboardHeight: CGFloat = 254 // The height on iPod touch simulator (i.e. probable smallest height)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,6 +129,11 @@ extension SearchViewController: UITextFieldDelegate {
         
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.resignFirstResponder()
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        viewModel.clearData()
+        return true
     }
     
     // Implement incremental search here by loading repos on each keyboard tap
