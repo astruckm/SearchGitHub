@@ -91,6 +91,7 @@ class SearchViewController: UIViewController {
             let keyboardShowingTableViewHeight = view.bounds.height - topAreaHeight - keyboardHeight
             return topAreaHeight + (keyboardShowingTableViewHeight / 2)
         }
+        let activityIndicatorWidth: CGFloat = 40
                 
         NSLayoutConstraint.activate([
             searchTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -109,11 +110,8 @@ class SearchViewController: UIViewController {
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.topAnchor,
                                                        constant: activityIndicatorYPositionFromTop),
-            activityIndicator.widthAnchor.constraint(equalToConstant: 40)
-        ])
-        
-        view.bringSubviewToFront(searchResultsTableView)
-        view.bringSubviewToFront(activityIndicator)
+            activityIndicator.widthAnchor.constraint(equalToConstant: activityIndicatorWidth)
+        ])        
     }
     
     

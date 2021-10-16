@@ -18,6 +18,4 @@ class SearchResultTableViewCell: UITableViewCell, ReusableCell {
             self.textLabel?.text = newValue?.name
         }
     }
-    
-    
 }
